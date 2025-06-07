@@ -1,0 +1,53 @@
+{% include 'partials/header.html' %}
+<div class="container mt-5">
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h3>Manage File Extensions</h3>
+        </div>
+        <div class="card-body">
+            <form method="post" class="mb-3">
+                {% csrf_token %}
+                <input type="text" name="new_extension" class="form-control mb-2" placeholder="Add new extension (e.g., zip)">
+                <button type="submit" name="add_extension" class="btn btn-success">Add Extension</button>
+            </form>
+            <ul class="list-group">
+                {% for ext in extensions %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ ext.extension }}
+                        <form method="post" class="d-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="delete_extension_id" value="{{ ext.id }}">
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3>Manage Sensitive JS Files</h3>
+        </div>
+        <div class="card-body">
+            <form method="post" class="mb-3">
+                {% csrf_token %}
+                <input type="text" name="new_js_file" class="form-control mb-2" placeholder="Add new JS file (e.g., config.js)">
+                <button type="submit" name="add_js_file" class="btn btn-success">Add JS File</button>
+            </form>
+            <ul class="list-group">
+                {% for js in js_files %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ js.filename }}
+                        <form method="post" class="d-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="delete_js_file_id" value="{{ js.id }}">
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% include 'partials/footer.html' %}

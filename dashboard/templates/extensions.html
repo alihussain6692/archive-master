@@ -1,0 +1,62 @@
+{% include 'partials/header.html' %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>Extensions for {{ domain.name }}</h2>
+        </div>
+        <div class="card-body">
+
+            {% if extensions %}
+            <div class="d-flex justify-content-end mb-3">
+                <button id="toggleBtn" class="btn btn-outline-primary" onclick="toggleView()">Grid View</button>
+            </div>
+
+
+                <!-- List View -->
+                <ul id="listView" class="list-group">
+                    {% for ext, count in extensions.items %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="{% url 'filter_urls' domain.id ext %}" class="btn btn-link">{{ ext }}</a>
+                            <span class="badge bg-primary rounded-pill">{{ count }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Grid View -->
+                <div id="gridView" class="row row-cols-1 row-cols-md-3 g-4 d-none">
+                    {% for ext, count in extensions.items %}
+                        <div class="col">
+                            <div class="card h-100 border-primary">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ ext|upper }}</h5>
+                                    <p class="card-text">Count: <strong>{{ count }}</strong></p>
+                                    <a href="{% url 'filter_urls' domain.id ext %}" class="btn btn-primary">View URLs</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-center text-muted">No extensions found for this domain.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function toggleView() {
+        const listView = document.getElementById('listView');
+        const gridView = document.getElementById('gridView');
+        const toggleBtn = document.getElementById('toggleBtn');
+
+        listView.classList.toggle('d-none');
+        gridView.classList.toggle('d-none');
+
+        toggleBtn.textContent = listView.classList.contains('d-none') ? 'List View' : 'Grid View';
+    }
+</script>
+
+{% include 'partials/footer.html' %}

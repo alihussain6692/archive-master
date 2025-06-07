@@ -1,0 +1,90 @@
+{% include 'partials/header.html' %}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h2>About Wayback Master</h2>
+        </div>
+        <div class="card-body">
+            <p class="lead">
+                <strong>Wayback Master</strong> is a powerful tool designed for researchers, security analysts, and developers to efficiently explore historical web content using the <strong>Wayback Machine</strong>. This framework enables targeted filtering of archived URLs based on file extensions and sensitive JavaScript file names that are defined and managed through the database.
+            </p>
+
+            <hr>
+
+            <h4 class="text-primary">🔍 Core Functionalities</h4>
+            <ul class="list-group mb-4">
+                <li class="list-group-item">
+                    <strong>Dynamic Extension Management:</strong> The framework allows users to <em>add, update, or delete</em> file extensions and sensitive JS file names used for filtration via a CRUD interface.
+                </li>
+                <li class="list-group-item">
+                    <strong>Archived URL Collection:</strong> When a domain is submitted, the system uses <code>curl</code> to query the <strong>Wayback Machine CDX API</strong>, retrieving archived URLs related to the target domain.
+                </li>
+                <li class="list-group-item">
+                    <strong>Multi-threaded Filtration:</strong> URLs are processed in parallel using multi-threading to filter them based on the extensions and JavaScript filenames stored in the database.
+                </li>
+                <li class="list-group-item">
+                    <strong>Structured Storage:</strong> Filtered results are saved and categorized by domain and extension, allowing easy browsing via the dashboard.
+                </li>
+                <li class="list-group-item">
+                    <strong>Wayback Archive Access:</strong> Each result includes a button to directly open the archived version of the file via the Wayback Machine.
+                </li>
+            </ul>
+
+            <hr>
+
+            <h4 class="text-primary">📂 How It Works</h4>
+            <ol class="mb-4">
+                <li>A user enters a domain name in the interface.</li>
+                <li>The system sends a request to the Wayback Machine and downloads all associated URLs into a temporary file.</li>
+                <li>The framework reads the file and checks if the URLs end with any of the extensions or sensitive JavaScript filenames stored in the database.</li>
+                <li>Matched URLs are saved and linked to the domain in the database for future access.</li>
+                <li>The user can view the filtered data categorized by extension, and click to explore the archived versions on the Wayback Machine.</li>
+            </ol>
+
+            <hr>
+
+            <h4 class="text-primary">📁 Supported File Types</h4>
+            <p>Users can manage an extensive list of file extensions such as:</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <ul>
+                        <li>.pdf</li>
+                        <li>.zip</li>
+                        <li>.js</li>
+                        <li>.config</li>
+                        <li>.env</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul>
+                        <li>.docx</li>
+                        <li>.xlsx</li>
+                        <li>.tar</li>
+                        <li>.bak</li>
+                        <li>.crt</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul>
+                        <li>config.js</li>
+                        <li>secrets.js</li>
+                        <li>api_keys.js</li>
+                        <li>tokens.js</li>
+                        <li>cookies.js</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="mt-3">
+                This flexibility makes Wayback Master ideal for sensitive file hunting, archival data research, and historical web application analysis.
+            </p>
+
+            <div class="text-center mt-4">
+                <a href="{% url 'dashboard' %}" class="btn btn-primary">Go to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'partials/footer.html' %}
