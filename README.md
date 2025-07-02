@@ -48,7 +48,7 @@ Wayback Master is a powerful web-based tool for analyzing and filtering archived
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/wayback-master.git
+git clone https://github.com/alihussain6692/wayback-master.git
 cd wayback-master
 ```
 ### Install Dependencies
